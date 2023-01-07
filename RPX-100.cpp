@@ -64,7 +64,7 @@ void parse_option_mode() {
 }
 
 void parse_option_help() {
-    cout << "Options for starting RPX-100: RF-test --mode \033[36mMODE\033[0m [--port [36mPORT\033[0m]" << endl;
+    cout << "Options for starting RPX-100: RF-test --mode \033[36mMODE\033[0m [--port \033[36mPORT\033[0m]" << endl;
     cout << endl;
     cout << "\033[36mMODE\033[0m:" << endl;
     cout << "     \033[32mRX\033[0m for receive mode" << endl;
