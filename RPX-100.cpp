@@ -184,7 +184,7 @@ int main(int argc, char *argv[])
     }
     
     // Start thread for WebSocket proxy
-    if (pthread_create(&threads[3], nullptr, startWebsocketServer, (void *)3) != 0)
+    if (pthread_create(&threads[3], nullptr, startWebsocketServer, &port) != 0)
     {
         msg.str("");
         msg << "ERROR starting thread 3";
