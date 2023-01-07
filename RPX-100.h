@@ -40,6 +40,7 @@
 #pragma once
 
 #define NUM_THREADS 5 // max number of main threads
+#define PORT_NUMBER 8085
 pthread_mutex_t SDRmutex;
 
 // SDR facility

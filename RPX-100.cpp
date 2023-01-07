@@ -79,7 +79,7 @@ void parse_option_help() {
 
 int main(int argc, char *argv[])
 {
-    int port = 8085;
+    int port = PORT_NUMBER;
     if (argc == 1)
     {
         cout << "Starting RPX-100 with default settings:\n";
