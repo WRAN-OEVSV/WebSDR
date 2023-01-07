@@ -64,7 +64,7 @@ void parse_option_mode() {
 }
 
 void parse_option_help() {
-    cout << "Options for starting RPX-100: RF-test \033[36mMODE\033[0m" << endl;
+    cout << "Options for starting RPX-100: RF-test --mode \033[36mMODE\033[0m [--port [36mPORT\033[0m]" << endl;
     cout << endl;
     cout << "\033[36mMODE\033[0m:" << endl;
     cout << "     \033[32mRX\033[0m for receive mode" << endl;
@@ -72,6 +72,10 @@ void parse_option_help() {
     cout << "     \033[31mTX6m\033[0m for transmit mode with bandpass filter for 50-54 MHz" << endl;
     cout << "     \033[31mTX2m\033[0m for transmit mode with bandpass filter for 144-146 MHz" << endl;
     cout << "     \033[31mTX70cm\033[0m for transmit mode with bandpass filter for 430-440 MHz" << endl;
+    cout << endl;
+    cout << endl;
+    cout << "\033[36mPORT\033[0m:" << endl;
+    cout << "     \033[32m1..." << UINT16_MAX << "\033[0m port number (note: low ports need administrative permissions)." << endl;
     cout << endl;
     exit(0);
 }
