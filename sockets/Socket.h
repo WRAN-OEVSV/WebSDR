@@ -39,11 +39,11 @@ class Socket
   bool accept ( Socket& ) const;
 
   // Client initialization
-  bool connect ( const std::string host, const int port );
+  bool connect ( const std::string &host, const int port );
 
   // Data Transimission
   bool send ( const std::string ) const;
-  int recv ( std::string& ) const;
+  ssize_t recv ( std::string& ) const;
 
 
   void set_non_blocking ( const bool );
@@ -53,7 +53,7 @@ class Socket
  private:
 
   int m_sock;
-  sockaddr_in m_addr;
+  sockaddr_in6 m_addr;
 
 
 };
