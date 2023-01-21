@@ -179,9 +179,9 @@ void print_gpio(uint8_t gpio_val)
     }
 }
 
-void *startWebsocketServer(void *threadID)
+void *startWebsocketServer(void *port)
 {
-    rpxServer es = rpxServer(PORT_NUMBER);
+    rpxServer es = rpxServer(*((int*)port));
     stringstream msgSOCKET;
 
     while (socketsON)
