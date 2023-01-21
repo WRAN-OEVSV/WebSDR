@@ -13,6 +13,7 @@
 
 #include <string>
 #include <cstring>
+#include <stdexcept>
 #include "libwebsockets.h"
 #include "Util.h"
 #include "WebSocketServer.h"
@@ -98,13 +99,13 @@ WebSocketServer::WebSocketServer( int port, const string certPath, const string&
 
     if( !this->_certPath.empty( ) && !this->_keyPath.empty( ) )
     {
-        Util::log( "Using SSL certPath=" + this->_certPath + ". keyPath=" + this->_keyPath + "." );
+        Util::log( "Using TLS certPath=" + this->_certPath + ". keyPath=" + this->_keyPath + "." );
         info.ssl_cert_filepath        = this->_certPath.c_str( );
         info.ssl_private_key_filepath = this->_keyPath.c_str( );
     }
     else
     {
-        Util::log( "Not using SSL" );
+        Util::log( "Not using TLS" );
         info.ssl_cert_filepath        = nullptr;
         info.ssl_private_key_filepath = nullptr;
     }
@@ -118,7 +119,7 @@ WebSocketServer::WebSocketServer( int port, const string certPath, const string&
     info.ka_interval = 10; // 10s interval for sending probes
     this->_context = lws_create_context( &info );
     if( !this->_context )
-        throw "libwebsocket init failed";
+        throw runtime_error("libwebsocket init failed");
     msgWS.str("");
     msgWS << "Server started on port " << Util::toString( this->_port ) << endl;
     Logger(msgWS.str());
@@ -142,7 +143,7 @@ WebSocketServer::~WebSocketServer( )
 
 void WebSocketServer::onConnectWrapper( int socketID )
 {
-    Connection* c = new Connection;
+    auto* c = new Connection;
     c->createTime = time( nullptr );
     this->connections[ socketID ] = c;
     this->onConnect( socketID );
@@ -182,9 +183,9 @@ string WebSocketServer::getValue( int socketID, const string& name )
 {
     return this->connections[socketID]->keyValueMap[name];
 }
-int WebSocketServer::getNumberOfConnections( )
+size_t WebSocketServer::getNumberOfConnections( )
 {
-    return this->connections.size( );
+    return this->connections.size();
 }
 
 void WebSocketServer::run( uint64_t timeout )
@@ -198,7 +199,7 @@ void WebSocketServer::run( uint64_t timeout )
 void WebSocketServer::wait( uint64_t timeout )
 {
     if( lws_service( this->_context, timeout ) < 0 )
-        throw "Error polling for socket activity.";
+        throw runtime_error("Error polling for socket activity.");
 }
 
 void WebSocketServer::_removeConnection( int socketID )

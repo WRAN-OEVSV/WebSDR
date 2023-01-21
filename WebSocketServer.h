@@ -13,11 +13,11 @@
 
 #ifndef _WEBSOCKETSERVER_H
 #define _WEBSOCKETSERVER_H
-#include <stdint.h>
+#include <cstdint>
 #include <map>
 #include <string>
 #include <list>
-#include <stdio.h>
+#include <cstdio>
 #include <ctime>
 #include <sys/time.h>
 #include <iostream>
@@ -57,7 +57,7 @@ public:
     // Key => value storage for each connection
     string getValue( int socketID, const string& name );
     void   setValue( int socketID, const string& name, const string& value );
-    int    getNumberOfConnections( );
+    size_t    getNumberOfConnections( );
 
     // Overridden by children
     virtual void onConnect(    int socketID                        ) = 0;
