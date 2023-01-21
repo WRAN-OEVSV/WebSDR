@@ -1,0 +1,3 @@
+[submodule "802_22_base"]
+	path = 802_22_base
+	url = https://github.com/WRAN-OEVSV/802_22_Base.git
