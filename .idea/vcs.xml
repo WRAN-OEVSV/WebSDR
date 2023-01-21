@@ -2,5 +2,16 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/802_22_base" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/websocket" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/websocket/minimal-examples/embedded/lhp/esp32-heltec-128-64/libwebsockets" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/websocket/minimal-examples/embedded/lhp/esp32-waveshare-104-212/libwebsockets" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/websocket/minimal-examples/embedded/lhp/esp32-waveshare-122-250-bw/libwebsockets" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/websocket/minimal-examples/embedded/lhp/esp32-waveshare-400-300-4gray/libwebsockets" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/websocket/minimal-examples/embedded/lhp/esp32-waveshare-600-448-7col/libwebsockets" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/websocket/minimal-examples/embedded/lhp/esp32-wrover-kit-320-200/libwebsockets" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/websocket/minimal-examples/embedded/lhp/esp32s2-kaluga-320-200/libwebsockets" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/websocket/minimal-examples/embedded/pico/pico-sspc-binance/libwebsockets" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/websocket/minimal-examples/embedded/rt595/hello_world/libwebsockets" vcs="Git" />
   </component>
 </project>
