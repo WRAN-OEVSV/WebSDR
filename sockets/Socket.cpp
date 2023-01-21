@@ -35,7 +35,7 @@ Socket::~Socket()
 
 bool Socket::create()
 {
-  m_sock = socket ( AF_INET,
+  m_sock = socket ( PF_INET6,
 		    SOCK_STREAM,
 		    0 );
 
@@ -47,6 +47,8 @@ bool Socket::create()
   int on = 1;
   if ( setsockopt ( m_sock, SOL_SOCKET, SO_REUSEADDR, ( const char* ) &on, sizeof ( on ) ) == -1 )
     return false;
+  // this would make it IPv6 only. Maybe support it via an option.
+  // setsockopt(m_sock, IPPROTO_IPV6, IPV6_V6ONLY, &on, sizeof(on));
 
 
   return true;
@@ -65,9 +67,9 @@ bool Socket::bind ( const int port )
 
 
 
-  m_addr.sin_family = AF_INET;
-  m_addr.sin_addr.s_addr = INADDR_ANY;
-  m_addr.sin_port = htons ( port );
+  m_addr.sin6_family = AF_INET6;
+  m_addr.sin6_addr = IN6ADDR_ANY_INIT;
+  m_addr.sin6_port = htons ( port );
 
   int bind_return = ::bind ( m_sock,
 			     ( struct sockaddr * ) &m_addr,
@@ -116,7 +118,7 @@ bool Socket::accept ( Socket& new_socket ) const
 
 bool Socket::send ( const std::string s ) const
 {
-  int status = ::send ( m_sock, s.c_str(), s.size(), MSG_NOSIGNAL );
+  auto status = ::send ( m_sock, s.c_str(), s.size(), MSG_NOSIGNAL );
   if ( status == -1 )
     {
       return false;
@@ -128,7 +130,7 @@ bool Socket::send ( const std::string s ) const
 }
 
 
-int Socket::recv ( std::string& s ) const
+ssize_t Socket::recv ( std::string& s ) const
 {
   char buf [ MAXRECV + 1 ];
 
@@ -136,7 +138,7 @@ int Socket::recv ( std::string& s ) const
 
   memset ( buf, 0, MAXRECV + 1 );
 
-  int status = ::recv ( m_sock, buf, MAXRECV, 0 );
+  auto status = ::recv ( m_sock, buf, MAXRECV, 0 );
 
   if ( status == -1 )
     {
@@ -156,14 +158,14 @@ int Socket::recv ( std::string& s ) const
 
 
 
-bool Socket::connect ( const std::string host, const int port )
+bool Socket::connect ( const std::string &host, const int port )
 {
   if ( ! is_valid() ) return false;
 
-  m_addr.sin_family = AF_INET;
-  m_addr.sin_port = htons ( port );
+  m_addr.sin6_family = AF_INET6;
+  m_addr.sin6_port = htons ( port );
 
-  int status = inet_pton ( AF_INET, host.c_str(), &m_addr.sin_addr );
+  int status = inet_pton ( AF_INET6, host.c_str(), &m_addr.sin6_addr );
 
   if ( errno == EAFNOSUPPORT ) return false;
 
