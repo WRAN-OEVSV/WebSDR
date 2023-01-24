@@ -43,7 +43,7 @@
 #include "WebSocketServer.h"
 
 
-#pragma onces
+#pragma once
 
 #define NUM_CONNECTS 5 // max number of sockets connections
 #define TIMEOUT 500
@@ -93,15 +93,11 @@ int samplesRead = 1048;
 
 // Initialize buffer for spectogram
 const int nfft = 512;
-liquid_float_complex c_sp_buf[sampleCnt]; // complex buffer to hold spectogram data result
 float sp_psd[nfft];
-int colormap = 3;
-double step = sampleRate / (nfft);
 
 bool rxON = true;
 
 // Socket Server facility
-int ConCurSocket;
 bool socketsON = true;
 
 // For any real project this should be defined separately in a header file
@@ -114,4 +110,14 @@ public:
     virtual void onMessage(    int socketID, const string& data    );
     virtual void onDisconnect( int socketID                        );
     virtual void   onError(    int socketID, const string& message );
+
+    void handle_command_band(int par) const;
+
+    void handle_command_bandwidth(int par) const;
+
+    void handle_command_channel(int par) const;
+
+private:
+    void handle_command_channel_single(double rxFrequency, double txFrequency, double span0) const;
+    void handle_command_bandwidth_single(double spn) const;
 };
