@@ -5,10 +5,18 @@
   <title>RPX-100</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--
+      =Application Configuration=
+      Set it up with your data.
+      TRXTZ: Transceiver Timezone - If omitted, it will fall back to UTC.
+      call: Your Callsign displayed on the top left. If omitted, it will fall back to OE3BIA which is fine for testing,
+            but not for a production deployment.
+            It is important that you add yours.
+  -->
+  <meta name="TRXTZ" content="Europe/Vienna">
+  <meta name="call" content="OE3BIA">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="assets/styles/material-icons.css" rel="stylesheet">
 </head>
 <body class="mat-typography">
   <app-root></app-root>

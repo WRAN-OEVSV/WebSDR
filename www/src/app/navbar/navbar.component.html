@@ -58,7 +58,7 @@
     </mat-menu>
   </div>
   <div class="nav navbar-nav ml-auto w-100 justify-content-end" style="float: right; width: 150px; text-align: center" fxHide.sm>
-    <app-clock></app-clock>
+    <app-clock [timeZone]="getTimeZone()"></app-clock>
   </div>
 </mat-toolbar>
 
@@ -113,7 +113,7 @@
       </mat-menu>
     </div>
     <div class="nav navbar-nav ml-auto w-100 justify-content-end" style="float: right; width: 150px; text-align: center">
-      <app-clock></app-clock>
+      <app-clock [timeZone]="getTimeZone()"></app-clock>
     </div>
   </mat-drawer>
   <mat-drawer-content>

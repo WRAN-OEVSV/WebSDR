@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {WebsocketService} from "../websocket.service";
 import {Meta} from "@angular/platform-browser";
-import {callsign, name} from '../global-variables';
+import {callsign, defaultTimeZone} from '../global-variables';
 
 @Component({
   selector: 'app-navbar',
@@ -62,8 +62,10 @@ export class NavbarComponent {
     {"name": "60min", value: 60 }
   ];
 
+  private tzCached: string|null;
 
   constructor(private websocket: WebsocketService, private meta: Meta) {
+    this.tzCached = null;
   }
 
   public cmd(key: string, value: any) {
@@ -85,6 +87,19 @@ export class NavbarComponent {
     } else {
       return callsign
     }
+  }
+
+  getTimeZone() {
+    if (this.tzCached != null) {
+      return this.tzCached;
+    }
+    const tz: HTMLMetaElement|null = this.meta.getTag("name=TRXTZ");
+    if (tz) {
+      this.tzCached = tz.content
+    } else {
+      this.tzCached = defaultTimeZone
+    }
+    return this.tzCached;
   }
 
   selectChannel(id: number) {

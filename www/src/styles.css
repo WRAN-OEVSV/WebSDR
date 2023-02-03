@@ -9,10 +9,6 @@ html,
   padding: 0;
   width: 100%;
 }
-.row.parameter {
-  margin-top: 8px;
-  margin-bottom: 5px;
-}
 
 /* Center the content in the browser window */
 .container-fluid {

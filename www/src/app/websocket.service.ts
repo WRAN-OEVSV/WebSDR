@@ -1,4 +1,4 @@
-import {EventEmitter, Injectable} from '@angular/core';
+import {EventEmitter, Injectable, isDevMode} from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -50,13 +50,16 @@ export class WebsocketService {
   }
 
   private handleCose() {
-    console.log("closed");
     if (this.reconnectDesired) {
       setTimeout(() => this.initializeWebsocket(), 1000);
     }
   }
 
   private connectWS(): void {
+    if (isDevMode()) {
+      this.ws = new WebSocket('ws://localhost:8085/ws');
+      return;
+    }
     if (window.location.host.startsWith('https')) {
       this.ws = new WebSocket("wss://" + window.location.host + "/ws/");
     } else {

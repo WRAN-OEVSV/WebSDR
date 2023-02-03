@@ -14,7 +14,6 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import { WaterfallComponent } from './waterfall/waterfall.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +31,6 @@ import { HttpClientModule } from '@angular/common/http';
     MatButtonModule,
     MatMenuModule,
     MatIconModule,
-    HttpClientModule,
     MatSidenavModule
   ],
   providers: [],
