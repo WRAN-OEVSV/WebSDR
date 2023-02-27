@@ -18,6 +18,7 @@ import { UserManagementComponent } from './user-management/user-management.compo
 import { LoginFormComponent } from './user-management/login-form/login-form.component';
 import {MatInputModule} from "@angular/material/input";
 import {MatDialogModule} from '@angular/material/dialog';
+import { LogViewComponent } from './log-view/log-view.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     FooterComponent,
     WaterfallComponent,
     UserManagementComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    LogViewComponent
   ],
     imports: [
         BrowserModule,

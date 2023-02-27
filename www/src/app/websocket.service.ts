@@ -9,6 +9,7 @@ export class WebsocketService {
   private emitter: EventEmitter<any> = new EventEmitter();
   private socketEventEmitter: EventEmitter<string> = new EventEmitter();
   private reconnectDesired: boolean = true;
+  private buffer: Array<string> = [];
 
   constructor() {
     this.initializeWebsocket();
@@ -33,6 +34,12 @@ export class WebsocketService {
 
     // @ts-ignore
     this.ws.onopen = function() {
+      while (that.buffer.length > 0) {
+        const first = that.buffer.shift();
+        if (first) {
+          that.ws?.send(first);
+        }
+      }
       that.socketEventEmitter.emit("open");
     }
     // @ts-ignore
@@ -51,7 +58,7 @@ export class WebsocketService {
   }
 
   cmd(c: any, p: any) {
-    this.ws?.send(JSON.stringify({cmd: c, arg: p}));
+    this.sendObject({cmd: c, arg: p});
   }
 
   private handleCose() {
@@ -78,7 +85,11 @@ export class WebsocketService {
    * @param str the string to send
    */
   public sendString(str: string) {
-    this.ws?.send(str);
+    if (this.ws?.readyState === WebSocket.OPEN) {
+      this.ws?.send(str);
+    } else {
+      this.buffer.push(str);
+    }
   }
 
   /**

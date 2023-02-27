@@ -1,5 +1,6 @@
 
 <app-navbar>
   <app-waterfall></app-waterfall>
+  <app-log-view *ngIf="authenticationService.hasPermission('read_log')"></app-log-view>
   <app-footer></app-footer>
 </app-navbar>
