@@ -313,733 +313,168 @@ void rpxServer::onMessage(int socketID, const string &data)
     }
     if (cmd == "band")
     {
-        pthread_t threads[5];
-        switch (par)
-        {
-        case 1:         
-            pthread_mutex_init(&SDRmutex, nullptr);
-            rxON = false;
-            sleep(1);
-            if (SDRfrequency(device, Ch1_RX, Ch1_TX) != 0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR setting Frequency for SDR";
-                Logger(msgSDR.str());
-            }
-            if (SDRsampleRate(device, Ch1_SR) !=0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR setting SampleRate for SDR";
-                Logger(msgSDR.str());
-            }
-            rxFreq = Ch1_RX;
-            txFreq = Ch1_TX;
-            span = Ch1_SR;
-            rxON = true;
-            if (pthread_create(&threads[1], nullptr, startSDRStream, (void *)1) != 0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR starting thread 1";
-                Logger(msgSDR.str());
-            }
-            break;
-
-        case 2:
-            pthread_mutex_init(&SDRmutex, nullptr);
-            rxON = false;
-            sleep(1);
-            if (SDRfrequency(device, Ch2_RX, Ch2_TX) != 0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR setting Frequency for SDR";
-                Logger(msgSDR.str());
-            }
-            if (SDRsampleRate(device, Ch2_SR) !=0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR setting SampleRate for SDR";
-                Logger(msgSDR.str());
-            }
-            rxFreq = Ch2_RX;
-            txFreq = Ch2_TX;
-            span = Ch2_SR;
-            rxON = true;
-            if (pthread_create(&threads[1], nullptr, startSDRStream, (void *)1) != 0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR starting thread 1";
-                Logger(msgSDR.str());
-            }
-            break;
-
-        case 3:
-            pthread_mutex_init(&SDRmutex, nullptr);
-            rxON = false;
-            sleep(1);
-            if (SDRfrequency(device, Ch3_RX, Ch3_TX) != 0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR setting Frequency for SDR";
-                Logger(msgSDR.str());
-            }
-            if (SDRsampleRate(device, Ch3_SR) !=0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR setting SampleRate for SDR";
-                Logger(msgSDR.str());
-            }
-            rxFreq = Ch3_RX;
-            txFreq = Ch3_TX;
-            span = Ch3_SR;
-            rxON = true;
-            if (pthread_create(&threads[1], nullptr, startSDRStream, (void *)1) != 0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR starting thread 1";
-                Logger(msgSDR.str());
-            }
-            break;
-
-        default:
-            pthread_mutex_init(&SDRmutex, nullptr);
-            rxON = false;
-            sleep(1);
-            if (SDRfrequency(device, Ch4_RX, Ch4_TX) != 0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR setting Frequency for SDR";
-                Logger(msgSDR.str());
-            }
-            if (SDRsampleRate(device, Ch4_SR) !=0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR setting SampleRate for SDR";
-                Logger(msgSDR.str());
-            }
-            rxFreq = Ch4_RX;
-            txFreq = Ch4_TX;
-            span = Ch4_SR;
-            rxON = true;
-            if (pthread_create(&threads[1], nullptr, startSDRStream, (void *)1) != 0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR starting thread 1";
-                Logger(msgSDR.str());
-            }
-            break;
-        }
+        handle_command_band(par);
     }
 
     if (cmd == "bandwidth")
     {
-        pthread_t threads[5];
-        switch (par)
-        {
-        case 1:           
-            pthread_mutex_init(&SDRmutex, nullptr);
-            rxON = false;
-            sleep(1);
-            if (SDRsampleRate(device, 1e6) !=0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR setting SampleRate for SDR";
-                Logger(msgSDR.str());
-            }
-            span = 1e6;
-            rxON = true;
-            if (pthread_create(&threads[1], nullptr, startSDRStream, (void *)1) != 0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR starting thread 1";
-                Logger(msgSDR.str());
-            }
-            break;
-
-        case 2:
-            pthread_mutex_init(&SDRmutex, nullptr);
-            rxON = false;
-            sleep(1);
-            if (SDRsampleRate(device, 2e6) !=0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR setting SampleRate for SDR";
-                Logger(msgSDR.str());
-            }
-            span = 2e6;
-            rxON = true;
-            if (pthread_create(&threads[1], nullptr, startSDRStream, (void *)1) != 0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR starting thread 1";
-                Logger(msgSDR.str());
-            }
-            break;
-
-            case 4:
-            pthread_mutex_init(&SDRmutex, nullptr);
-            rxON = false;
-            sleep(1);
-            if (SDRsampleRate(device, 4e6) !=0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR setting SampleRate for SDR";
-                Logger(msgSDR.str());
-            }
-            span = 4e6;
-            rxON = true;
-            if (pthread_create(&threads[1], nullptr, startSDRStream, (void *)1) != 0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR starting thread 1";
-                Logger(msgSDR.str());
-            }
-            break;
-
-            case 8:
-            pthread_mutex_init(&SDRmutex, nullptr);
-            rxON = false;
-            sleep(1);
-            if (SDRsampleRate(device, 8e6) !=0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR setting SampleRate for SDR";
-                Logger(msgSDR.str());
-            }
-            span = 8e6;
-            rxON = true;
-            if (pthread_create(&threads[1], nullptr, startSDRStream, (void *)1) != 0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR starting thread 1";
-                Logger(msgSDR.str());
-            }
-            break;
-
-            case 16:
-            pthread_mutex_init(&SDRmutex, nullptr);
-            rxON = false;
-            sleep(1);
-            if (SDRsampleRate(device, 16e6) !=0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR setting SampleRate for SDR";
-                Logger(msgSDR.str());
-            }
-            span = 16e6;
-            rxON = true;
-            if (pthread_create(&threads[1], nullptr, startSDRStream, (void *)1) != 0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR starting thread 1";
-                Logger(msgSDR.str());
-            }
-            break;
-
-        default:
-            pthread_mutex_init(&SDRmutex, nullptr);
-            rxON = false;
-            sleep(1);
-            if (SDRsampleRate(device, 4e6) !=0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR setting default SampleRate for SDR";
-                Logger(msgSDR.str());
-            }
-            span = 4e6;
-            rxON = true;
-            if (pthread_create(&threads[1], nullptr, startSDRStream, (void *)1) != 0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR starting thread 1";
-                Logger(msgSDR.str());
-            }
-            break;
-        }
+        handle_command_bandwidth(par);
     }
 
     if (cmd == "channel")
     {
-        pthread_t threads[5];
-        switch (par)
-        {
-        case 4:         
-            pthread_mutex_init(&SDRmutex, nullptr);
-            rxON = false;
-            sleep(1);
-            if (SDRfrequency(device, Ch4_RX, Ch4_TX) != 0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR setting Frequency for SDR";
-                Logger(msgSDR.str());
-            }
-            if (SDRsampleRate(device, Ch4_SR) !=0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR setting SampleRate for SDR";
-                Logger(msgSDR.str());
-            }
-            rxFreq = Ch4_RX;
-            txFreq = Ch4_TX;
-            span = Ch4_SR;
-            rxON = true;
-            if (pthread_create(&threads[1], nullptr, startSDRStream, (void *)1) != 0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR starting thread 1";
-                Logger(msgSDR.str());
-            }
-            break;
-
-        case 5:
-            pthread_mutex_init(&SDRmutex, nullptr);
-            rxON = false;
-            sleep(1);
-            if (SDRfrequency(device, Ch5_RX, Ch5_TX) != 0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR setting Frequency for SDR";
-                Logger(msgSDR.str());
-            }
-            if (SDRsampleRate(device, Ch5_SR) !=0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR setting SampleRate for SDR";
-                Logger(msgSDR.str());
-            }
-            rxFreq = Ch5_RX;
-            txFreq = Ch5_TX;
-            span = Ch5_SR;
-            rxON = true;
-            if (pthread_create(&threads[1], nullptr, startSDRStream, (void *)1) != 0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR starting thread 1";
-                Logger(msgSDR.str());
-            }
-            break;
-
-        case 6:
-            pthread_mutex_init(&SDRmutex, nullptr);
-            rxON = false;
-            sleep(1);
-            if (SDRfrequency(device, Ch6_RX, Ch6_TX) != 0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR setting Frequency for SDR";
-                Logger(msgSDR.str());
-            }
-            if (SDRsampleRate(device, Ch6_SR) !=0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR setting SampleRate for SDR";
-                Logger(msgSDR.str());
-            }
-            rxFreq = Ch6_RX;
-            txFreq = Ch6_TX;
-            span = Ch6_SR;
-            rxON = true;
-            if (pthread_create(&threads[1], nullptr, startSDRStream, (void *)1) != 0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR starting thread 1";
-                Logger(msgSDR.str());
-            }
-            break;
-
-            case 7:
-            pthread_mutex_init(&SDRmutex, nullptr);
-            rxON = false;
-            sleep(1);
-            if (SDRfrequency(device, Ch7_RX, Ch7_TX) != 0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR setting Frequency for SDR";
-                Logger(msgSDR.str());
-            }
-            if (SDRsampleRate(device, Ch7_SR) !=0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR setting SampleRate for SDR";
-                Logger(msgSDR.str());
-            }
-            rxFreq = Ch7_RX;
-            txFreq = Ch7_TX;
-            span = Ch7_SR;
-            rxON = true;
-            if (pthread_create(&threads[1], nullptr, startSDRStream, (void *)1) != 0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR starting thread 1";
-                Logger(msgSDR.str());
-            }
-            break;
-
-            case 8:
-            pthread_mutex_init(&SDRmutex, nullptr);
-            rxON = false;
-            sleep(1);
-            if (SDRfrequency(device, Ch8_RX, Ch8_TX) != 0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR setting Frequency for SDR";
-                Logger(msgSDR.str());
-            }
-            if (SDRsampleRate(device, Ch8_SR) !=0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR setting SampleRate for SDR";
-                Logger(msgSDR.str());
-            }
-            rxFreq = Ch8_RX;
-            txFreq = Ch8_TX;
-            span = Ch8_SR;
-            rxON = true;
-            if (pthread_create(&threads[1], nullptr, startSDRStream, (void *)1) != 0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR starting thread 1";
-                Logger(msgSDR.str());
-            }
-            break;
-
-            case 9:
-            pthread_mutex_init(&SDRmutex, nullptr);
-            rxON = false;
-            sleep(1);
-            if (SDRfrequency(device, Ch9_RX, Ch9_TX) != 0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR setting Frequency for SDR";
-                Logger(msgSDR.str());
-            }
-            if (SDRsampleRate(device, Ch9_SR) !=0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR setting SampleRate for SDR";
-                Logger(msgSDR.str());
-            }
-            rxFreq = Ch9_RX;
-            txFreq = Ch9_TX;
-            span = Ch9_SR;
-            rxON = true;
-            if (pthread_create(&threads[1], nullptr, startSDRStream, (void *)1) != 0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR starting thread 1";
-                Logger(msgSDR.str());
-            }
-            break;
-
-            case 10:
-            pthread_mutex_init(&SDRmutex, nullptr);
-            rxON = false;
-            sleep(1);
-            if (SDRfrequency(device, Ch10_RX, Ch10_TX) != 0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR setting Frequency for SDR";
-                Logger(msgSDR.str());
-            }
-            if (SDRsampleRate(device, Ch10_SR) !=0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR setting SampleRate for SDR";
-                Logger(msgSDR.str());
-            }
-            rxFreq = Ch10_RX;
-            txFreq = Ch10_TX;
-            span = Ch10_SR;
-            rxON = true;
-            if (pthread_create(&threads[1], nullptr, startSDRStream, (void *)1) != 0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR starting thread 1";
-                Logger(msgSDR.str());
-            }
-            break;
-
-            case 11:
-            pthread_mutex_init(&SDRmutex, nullptr);
-            rxON = false;
-            sleep(1);
-            if (SDRfrequency(device, Ch11_RX, Ch11_TX) != 0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR setting Frequency for SDR";
-                Logger(msgSDR.str());
-            }
-            if (SDRsampleRate(device, Ch11_SR) !=0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR setting SampleRate for SDR";
-                Logger(msgSDR.str());
-            }
-            rxFreq = Ch11_RX;
-            txFreq = Ch11_TX;
-            span = Ch11_SR;
-            rxON = true;
-            if (pthread_create(&threads[1], nullptr, startSDRStream, (void *)1) != 0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR starting thread 1";
-                Logger(msgSDR.str());
-            }
-            break;
-
-            case 12:
-            pthread_mutex_init(&SDRmutex, nullptr);
-            rxON = false;
-            sleep(1);
-            if (SDRfrequency(device, Ch12_RX, Ch12_TX) != 0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR setting Frequency for SDR";
-                Logger(msgSDR.str());
-            }
-            if (SDRsampleRate(device, Ch12_SR) !=0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR setting SampleRate for SDR";
-                Logger(msgSDR.str());
-            }
-            rxFreq = Ch12_RX;
-            txFreq = Ch12_TX;
-            span = Ch12_SR;
-            rxON = true;
-            if (pthread_create(&threads[1], nullptr, startSDRStream, (void *)1) != 0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR starting thread 1";
-                Logger(msgSDR.str());
-            }
-            break;
-
-            case 13:
-            pthread_mutex_init(&SDRmutex, nullptr);
-            rxON = false;
-            sleep(1);
-            if (SDRfrequency(device, Ch13_RX, Ch13_TX) != 0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR setting Frequency for SDR";
-                Logger(msgSDR.str());
-            }
-            if (SDRsampleRate(device, Ch13_SR) !=0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR setting SampleRate for SDR";
-                Logger(msgSDR.str());
-            }
-            rxFreq = Ch13_RX;
-            txFreq = Ch13_TX;
-            span = Ch13_SR;
-            rxON = true;
-            if (pthread_create(&threads[1], nullptr, startSDRStream, (void *)1) != 0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR starting thread 1";
-                Logger(msgSDR.str());
-            }
-            break;
-
-            case 14:
-            pthread_mutex_init(&SDRmutex, nullptr);
-            rxON = false;
-            sleep(1);
-            if (SDRfrequency(device, Ch14_RX, Ch14_TX) != 0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR setting Frequency for SDR";
-                Logger(msgSDR.str());
-            }
-            if (SDRsampleRate(device, Ch14_SR) !=0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR setting SampleRate for SDR";
-                Logger(msgSDR.str());
-            }
-            rxFreq = Ch14_RX;
-            txFreq = Ch14_TX;
-            span = Ch14_SR;
-            rxON = true;
-            if (pthread_create(&threads[1], nullptr, startSDRStream, (void *)1) != 0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR starting thread 1";
-                Logger(msgSDR.str());
-            }
-            break;
-
-            case 15:
-            pthread_mutex_init(&SDRmutex, nullptr);
-            rxON = false;
-            sleep(1);
-            if (SDRfrequency(device, Ch15_RX, Ch15_TX) != 0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR setting Frequency for SDR";
-                Logger(msgSDR.str());
-            }
-            if (SDRsampleRate(device, Ch15_SR) !=0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR setting SampleRate for SDR";
-                Logger(msgSDR.str());
-            }
-            rxFreq = Ch15_RX;
-            txFreq = Ch15_TX;
-            span = Ch15_SR;
-            rxON = true;
-            if (pthread_create(&threads[1], nullptr, startSDRStream, (void *)1) != 0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR starting thread 1";
-                Logger(msgSDR.str());
-            }
-            break;
-
-            case 16:
-            pthread_mutex_init(&SDRmutex, nullptr);
-            rxON = false;
-            sleep(1);
-            if (SDRfrequency(device, Ch16_RX, Ch16_TX) != 0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR setting Frequency for SDR";
-                Logger(msgSDR.str());
-            }
-            if (SDRsampleRate(device, Ch16_SR) !=0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR setting SampleRate for SDR";
-                Logger(msgSDR.str());
-            }
-            rxFreq = Ch16_RX;
-            txFreq = Ch16_TX;
-            span = Ch16_SR;
-            rxON = true;
-            if (pthread_create(&threads[1], nullptr, startSDRStream, (void *)1) != 0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR starting thread 1";
-                Logger(msgSDR.str());
-            }
-            break;
-
-            case 17:
-            pthread_mutex_init(&SDRmutex, nullptr);
-            rxON = false;
-            sleep(1);
-            if (SDRfrequency(device, Ch17_RX, Ch17_TX) != 0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR setting Frequency for SDR";
-                Logger(msgSDR.str());
-            }
-            if (SDRsampleRate(device, Ch17_SR) !=0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR setting SampleRate for SDR";
-                Logger(msgSDR.str());
-            }
-            rxFreq = Ch17_RX;
-            txFreq = Ch17_TX;
-            span = Ch17_SR;
-            rxON = true;
-            if (pthread_create(&threads[1], nullptr, startSDRStream, (void *)1) != 0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR starting thread 1";
-                Logger(msgSDR.str());
-            }
-            break;
-
-            case 18:
-            pthread_mutex_init(&SDRmutex, nullptr);
-            rxON = false;
-            sleep(1);
-            if (SDRfrequency(device, Ch18_RX, Ch18_TX) != 0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR setting Frequency for SDR";
-                Logger(msgSDR.str());
-            }
-            if (SDRsampleRate(device, Ch18_SR) !=0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR setting SampleRate for SDR";
-                Logger(msgSDR.str());
-            }
-            rxFreq = Ch18_RX;
-            txFreq = Ch18_TX;
-            span = Ch18_SR;
-            rxON = true;
-            if (pthread_create(&threads[1], nullptr, startSDRStream, (void *)1) != 0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR starting thread 1";
-                Logger(msgSDR.str());
-            }
-            break;
-
-            case 19:
-            pthread_mutex_init(&SDRmutex, nullptr);
-            rxON = false;
-            sleep(1);
-            if (SDRfrequency(device, Ch19_RX, Ch19_TX) != 0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR setting Frequency for SDR";
-                Logger(msgSDR.str());
-            }
-            if (SDRsampleRate(device, Ch19_SR) !=0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR setting SampleRate for SDR";
-                Logger(msgSDR.str());
-            }
-            rxFreq = Ch19_RX;
-            txFreq = Ch19_TX;
-            span = Ch19_SR;
-            rxON = true;
-            if (pthread_create(&threads[1], nullptr, startSDRStream, (void *)1) != 0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR starting thread 1";
-                Logger(msgSDR.str());
-            }
-            break;
-
-        default:
-            pthread_mutex_init(&SDRmutex, nullptr);
-            rxON = false;
-            sleep(1);
-            if (SDRfrequency(device, Ch4_RX, Ch4_TX) != 0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR setting Frequency for SDR";
-                Logger(msgSDR.str());
-            }
-            if (SDRsampleRate(device, Ch4_SR) !=0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR setting SampleRate for SDR";
-                Logger(msgSDR.str());
-            }
-            rxON = true;
-            if (pthread_create(&threads[1], nullptr, startSDRStream, (void *)1) != 0)
-            {
-                msgSDR.str("");
-                msgSDR << "ERROR starting thread 1";
-                Logger(msgSDR.str());
-            }
-            break;
-        }
+        handle_command_channel(par);
     }
 
     // const string &message = this->getValue(socketID, "handle") + ": " + data;
 
     // this->broadcast(message);
+}
+void rpxServer::handle_command_channel_single(double rxFrequency, double txFrequency, double span0) const {
+    // TODO - this array gets destoyed - do we really want that?
+    pthread_t threads[5];
+    pthread_mutex_init(&SDRmutex, nullptr);
+    rxON = false;
+    sleep(1);
+    if (SDRfrequency(device, Ch4_RX, Ch4_TX) != 0)
+    {
+        msgSDR.str("");
+        msgSDR << "ERROR setting Frequency for SDR";
+        Logger(msgSDR.str());
+    }
+    if (SDRsampleRate(device, Ch4_SR) !=0)
+    {
+        msgSDR.str("");
+        msgSDR << "ERROR setting SampleRate for SDR";
+        Logger(msgSDR.str());
+    }
+    rxFreq = rxFrequency;
+    txFreq = txFrequency;
+    span = span0;
+    rxON = true;
+    if (pthread_create(&threads[1], nullptr, startSDRStream, (void *)1) != 0)
+    {
+        msgSDR.str("");
+        msgSDR << "ERROR starting thread 1";
+        Logger(msgSDR.str());
+    }
+}
+void rpxServer::handle_command_channel(int par) const {
+    switch (par)
+    {
+        // TODO: why no channel 1-3?
+        case 4:
+            this->handle_command_channel_single(Ch4_RX, Ch4_TX, Ch4_SR);
+            break;
+        case 5:
+            this->handle_command_channel_single(Ch5_RX, Ch5_TX, Ch5_SR);
+            break;
+        case 6:
+            this->handle_command_channel_single(Ch6_RX, Ch6_TX, Ch6_SR);
+            break;
+        case 7:
+            this->handle_command_channel_single(Ch7_RX, Ch7_TX, Ch7_SR);
+            break;
+        case 8:
+            this->handle_command_channel_single(Ch8_RX, Ch8_TX, Ch8_SR);
+            break;
+        case 9:
+            this->handle_command_channel_single(Ch9_RX, Ch9_TX, Ch9_SR);
+            break;
+        case 10:
+            this->handle_command_channel_single(Ch10_RX, Ch10_TX, Ch10_SR);
+            break;
+        case 11:
+            this->handle_command_channel_single(Ch11_RX, Ch11_TX, Ch11_SR);
+            break;
+        case 12:
+            this->handle_command_channel_single(Ch12_RX, Ch12_TX, Ch12_SR);
+            break;
+        case 13:
+            this->handle_command_channel_single(Ch13_RX, Ch13_TX, Ch13_SR);
+            break;
+        case 14:
+            this->handle_command_channel_single(Ch14_RX, Ch14_TX, Ch14_SR);
+            break;
+        case 15:
+            this->handle_command_channel_single(Ch15_RX, Ch15_TX, Ch15_SR);
+            break;
+        case 16:
+            this->handle_command_channel_single(Ch16_RX, Ch16_TX, Ch16_SR);
+            break;
+        case 17:
+            this->handle_command_channel_single(Ch17_RX, Ch17_TX, Ch17_SR);
+            break;
+        case 18:
+            this->handle_command_channel_single(Ch18_RX, Ch18_TX, Ch18_SR);
+            break;
+        case 19:
+            this->handle_command_channel_single(Ch19_RX, Ch19_TX, Ch19_SR);
+            break;
+        default:
+            // TODO: Why number 4 as default?
+            this->handle_command_channel_single(Ch4_RX, Ch4_TX, Ch4_SR);
+            break;
+    }
+}
+void rpxServer::handle_command_bandwidth_single(double spn) const {
+
+    // TODO - this array gets destoyed - do we really want that?
+    pthread_t threads[5];
+    pthread_mutex_init(&SDRmutex, nullptr);
+    rxON = false;
+    sleep(1);
+    if (SDRsampleRate(device, spn) !=0)
+    {
+        msgSDR.str("");
+        msgSDR << "ERROR setting SampleRate for SDR";
+        Logger(msgSDR.str());
+    }
+    span = spn;
+    rxON = true;
+    if (pthread_create(&threads[1], nullptr, startSDRStream, (void *)1) != 0)
+    {
+        msgSDR.str("");
+        msgSDR << "ERROR starting thread 1";
+        Logger(msgSDR.str());
+    }
+}
+void rpxServer::handle_command_bandwidth(int par) const {
+    switch (par)
+    {
+        case 1:
+        case 2:
+        case 4:
+        case 8:
+        case 16:
+            this->handle_command_bandwidth_single(par * 1e6);
+            break;
+        default:
+            this->handle_command_bandwidth_single(4 * 1e6);
+            break;
+    }
+}
+
+void rpxServer::handle_command_band(int par) const {
+    pthread_t threads[5];
+    switch (par)
+    {
+    case 1:
+        this->handle_command_channel_single(Ch1_RX, Ch1_TX, Ch1_SR);
+        break;
+
+    case 2:
+        this->handle_command_channel_single(Ch2_RX, Ch2_TX, Ch2_SR);
+        break;
+
+    case 3:
+        this->handle_command_channel_single(Ch3_RX, Ch3_TX, Ch3_SR);
+        break;
+
+    default:
+        this->handle_command_channel_single(Ch4_RX, Ch4_TX, Ch4_SR);
+        break;
+    }
 }
 
 void rpxServer::onDisconnect(int socketID)
