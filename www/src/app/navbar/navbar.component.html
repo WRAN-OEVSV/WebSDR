@@ -57,8 +57,11 @@
       </button>
     </mat-menu>
   </div>
-  <div class="nav navbar-nav ml-auto w-100 justify-content-end" style="float: right; width: 150px; text-align: center" fxHide.sm>
-    <app-clock [timeZone]="getTimeZone()"></app-clock>
+  <div class="nav navbar-nav ml-auto w-100" style="float: right; width: 200px; text-align: center" fxHide.sm>
+    <app-clock [timeZone]="getTimeZone()" class="block"></app-clock>
+  </div>
+  <div class="nav-item">
+    <app-user-management></app-user-management>
   </div>
 </mat-toolbar>
 
@@ -112,8 +115,11 @@
         </button>
       </mat-menu>
     </div>
-    <div class="nav navbar-nav ml-auto w-100 justify-content-end" style="float: right; width: 150px; text-align: center">
-      <app-clock [timeZone]="getTimeZone()"></app-clock>
+    <div class="nav navbar-nav ml-auto nav-item grow-to-end" style="width: 200px">
+      <app-user-management class="inline-block"></app-user-management>
+    </div>
+    <div class="nav navbar-nav ml-auto w-100 justify-content-end" style="float: right; width: 200px; text-align: center">
+      <app-clock [timeZone]="getTimeZone()" class="inline-block"></app-clock>
     </div>
   </mat-drawer>
   <mat-drawer-content>

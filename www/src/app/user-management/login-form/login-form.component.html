@@ -1,0 +1,25 @@
+<table>
+  <tr>
+    <td i18n>Username:</td>
+    <td>
+      <mat-form-field>
+        <input type="text" matInput [value]="username" (keyup)="setUsername($event)">
+      </mat-form-field>
+    </td>
+  </tr>
+  <tr>
+    <td i18n>Username:</td>
+    <td>
+      <mat-form-field>
+        <input type="password" matInput [value]="password" (keyup)="setPassword($event)">
+      </mat-form-field>
+    </td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>
+      <button mat-button (click)="authenticate()" i18n>Login</button>
+      <button mat-button (click)="abort()" i18n>Abort</button>
+    </td>
+  </tr>
+</table>

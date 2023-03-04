@@ -84,3 +84,11 @@
   background-color: #ABB2B9;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+.block {
+  display: block;
+}
+
+.inline-block {
+  display: inline-block;
+}

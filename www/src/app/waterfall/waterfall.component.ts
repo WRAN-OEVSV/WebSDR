@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {WebsocketService} from "../websocket.service";
 
 // @ts-ignore
@@ -16,6 +16,8 @@ export class WaterfallComponent implements OnInit {
   tx: string = "";
   min: string = "";
   max: string = "";
+  @Input("keybindingEnabled")
+  keybindingEnabled: boolean = false;
 
   constructor(private websocket: WebsocketService) {
   }
@@ -34,7 +36,11 @@ export class WaterfallComponent implements OnInit {
     this.websocket.getEmitter().subscribe((data) => this.processEvent(data))
 
 
-    window.addEventListener("keydown", (e) => this.spectrum?.onKeypress(e));
+    window.addEventListener("keydown", (e) => {
+      if (this.keybindingEnabled) {
+        this.spectrum?.onKeypress(e);
+      }
+    });
   }
 
 
