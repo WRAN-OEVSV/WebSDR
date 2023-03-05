@@ -14,25 +14,36 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import { WaterfallComponent } from './waterfall/waterfall.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { UserManagementComponent } from './user-management/user-management.component';
+import { LoginFormComponent } from './user-management/login-form/login-form.component';
+import {MatInputModule} from "@angular/material/input";
+import {MatDialogModule} from '@angular/material/dialog';
+import { LogViewComponent } from './log-view/log-view.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     ClockComponent,
     FooterComponent,
-    WaterfallComponent
+    WaterfallComponent,
+    UserManagementComponent,
+    LoginFormComponent,
+    LogViewComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    FlexLayoutModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatMenuModule,
-    MatIconModule,
-    MatSidenavModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        FlexLayoutModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatMenuModule,
+        MatIconModule,
+        MatSidenavModule,
+        MatInputModule,
+        MatDialogModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

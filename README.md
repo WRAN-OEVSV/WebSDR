@@ -41,5 +41,4 @@ The source code for this project can be found in the following repositories on G
 <li>WRAN Project Website (https://rpx-100.net):  <a href="https://github.com/WRAN-OEVSV/Website" target="_blank">https://github.com/WRAN-OEVSV/Website</a></li>
 <li>WRAN - IEEE802.22 Application for RPX-100: <a href="https://github.com/WRAN-OEVSV/IEEE802.22" target="_blank">https://github.com/WRAN-OEVSV/IEEE802.22</a></li>
 <li>WebSDR for RPX-100: <a href="https://github.com/WRAN-OEVSV/WebSDR" target="_blank">https://github.com/WRAN-OEVSV/WebSDR</a></li>
-<li>Hardware Design RPX-100: <a href="https://github.com/WRAN-OEVSV/Hardware" target="_blank">https://github.com/WRAN-OEVSV/Hardware</a></li>
 </ul>

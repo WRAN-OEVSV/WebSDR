@@ -7,7 +7,9 @@ export class WebsocketService {
 
   private ws?: WebSocket;
   private emitter: EventEmitter<any> = new EventEmitter();
+  private socketEventEmitter: EventEmitter<string> = new EventEmitter();
   private reconnectDesired: boolean = true;
+  private buffer: Array<string> = [];
 
   constructor() {
     this.initializeWebsocket();
@@ -20,6 +22,9 @@ export class WebsocketService {
   getEmitter(): EventEmitter<any> {
     return this.emitter;
   }
+  getSocketEventEmitter(): EventEmitter<string> {
+    return this.socketEventEmitter;
+  }
 
 
 
@@ -29,7 +34,13 @@ export class WebsocketService {
 
     // @ts-ignore
     this.ws.onopen = function() {
-      console.log("connected!");
+      while (that.buffer.length > 0) {
+        const first = that.buffer.shift();
+        if (first) {
+          that.ws?.send(first);
+        }
+      }
+      that.socketEventEmitter.emit("open");
     }
     // @ts-ignore
     this.ws.onclose = () => that.handleCose();
@@ -37,6 +48,7 @@ export class WebsocketService {
 
     // @ts-ignore
     this.ws.onerror = function(evt) {
+      that.emitter.emit("error")
       console.error(evt);
     }
     // @ts-ignore
@@ -46,10 +58,11 @@ export class WebsocketService {
   }
 
   cmd(c: any, p: any) {
-    this.ws?.send(c + ':' + p);
+    this.sendObject({cmd: c, arg: p});
   }
 
   private handleCose() {
+    this.socketEventEmitter.emit("close");
     if (this.reconnectDesired) {
       setTimeout(() => this.initializeWebsocket(), 1000);
     }
@@ -57,7 +70,7 @@ export class WebsocketService {
 
   private connectWS(): void {
     if (isDevMode()) {
-      this.ws = new WebSocket('ws://localhost:8085/ws');
+      this.ws = new WebSocket('ws://localhost:9123/ws');
       return;
     }
     if (window.location.host.startsWith('https')) {
@@ -65,6 +78,26 @@ export class WebsocketService {
     } else {
       this.ws = new WebSocket("ws://" + window.location.host + "/ws/");
     }
+  }
+
+  /**
+   * Send a string to the websocket (as is).
+   * @param str the string to send
+   */
+  public sendString(str: string) {
+    if (this.ws?.readyState === WebSocket.OPEN) {
+      this.ws?.send(str);
+    } else {
+      this.buffer.push(str);
+    }
+  }
+
+  /**
+   * Serialize the data to JSON and send it to the socket.
+   * @param o the object or data to send
+   */
+  public sendObject(o: any) {
+    this.sendString(JSON.stringify(o));
   }
 }
 
