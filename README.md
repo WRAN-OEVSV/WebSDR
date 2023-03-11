@@ -2,7 +2,7 @@
  <tr>
   <td><img src="doc/img/image1.png" height="340" alt="OFDMA"></td>
     <td>
-    <b>Open SDR Platform</b><br><br>
+    <b>WRAN IEEE 802.22</b><br><br>
         <img src="doc/img/Austria.jpg" height="11"> Austria:<br>
         OE1RSA, OE1VMC, OE3AEB, OE3BIA, OE9RIR, OE9RWV<br><br>
         <img src="doc/img/France.jpg" height="11"> France:<br>         
