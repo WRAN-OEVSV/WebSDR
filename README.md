@@ -42,11 +42,11 @@ Before compiling the code on the embedded device the following dependencies need
 <li>automake</li>
 <li>autoconf</li>
 <li>build-essentials</li>
-<li>cmake (latest versions or > 3.x</li>
-<li>gdb</li>
-<li>rsync</li>
-<li>libssl</li>
+<li>cmake (latest version or > 3.x)</li>
+<li>libssl-dev</li>
+<li>libsoapysdr-dev</li>
+<li>limesuite</li>
 </ul>
 
-Cloning for embedded devices has to be done recursive: `git clone --recursive git@github.com:isemann/RPX-100.git`
+Cloning for embedded devices has to be done recursive: `git clone --recursive git@github.com:WRAN-OEVSV/WebSDR.git`
 In the directory of the cloned source code do: `mkdir build && cd build && cmake .. && make`
