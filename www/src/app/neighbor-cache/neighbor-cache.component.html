@@ -11,7 +11,7 @@
   <tbody>
     <tr *ngFor="let entry of this.neighbourCache">
       <td><a [href]="'https://www.qrz.com/db/' + entry.callsign" target="_blank" *ngIf="entry.callsign.length > 3">{{ entry.callsign }}</a></td>
-      <td>{{ entry.mac }}</td>
+      <td><app-copy-to-clipborad-text-with-btn [text]="entry.mac"></app-copy-to-clipborad-text-with-btn></td>
       <td>
         <ul>
           <li *ngFor="let ipAddress of entry.ipv4">
