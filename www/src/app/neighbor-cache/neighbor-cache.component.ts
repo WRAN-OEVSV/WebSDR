@@ -7,16 +7,16 @@ class NeighbourCacheEntry {
   }
 }
 @Component({
-  selector: 'app-neighbour-cache',
-  templateUrl: './neighbour-cache.component.html',
-  styleUrls: ['./neighbour-cache.component.css']
+  selector: 'app-neighbor-cache',
+  templateUrl: './neighbor-cache.component.html',
+  styleUrls: ['./neighbor-cache.component.css']
 })
-export class NeighbourCacheComponent {
+export class NeighborCacheComponent {
 
   neighbourCache : Array<NeighbourCacheEntry> = []
 
   constructor(private websocket: WebsocketService) {
-    websocket.getEmitter().subscribe((data) => data['neighbour-cache'] && this.processData(data));
+    websocket.getEmitter().subscribe((data) => data['neighbor-cache'] && this.processData(data));
     websocket.getSocketEventEmitter().subscribe(code => this.socketEvent(code));
     this.updateNeighbourCache();
   }
@@ -28,11 +28,11 @@ export class NeighbourCacheComponent {
   }
 
   private updateNeighbourCache() {
-    this.websocket.sendObject({cmd: "neighbour_cache", sub_cmd: "list"});
+    this.websocket.sendObject({cmd: "neighbor_cache", sub_cmd: "list"});
   }
 
   private processData(data: any) {
-    const unpacked = data['neighbour-cache'];
+    const unpacked = data['neighbor-cache'];
     if (!!unpacked['list'] && Array.isArray(unpacked['list'])) {
       this.neighbourCache = [];
       for (const o of unpacked['list']) {

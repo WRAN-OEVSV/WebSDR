@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NeighbourCacheComponent } from './neighbour-cache.component';
+import { NeighborCacheComponent } from './neighbor-cache.component';
 
 describe('NeighbourCacheComponent', () => {
-  let component: NeighbourCacheComponent;
-  let fixture: ComponentFixture<NeighbourCacheComponent>;
+  let component: NeighborCacheComponent;
+  let fixture: ComponentFixture<NeighborCacheComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NeighbourCacheComponent ]
+      declarations: [ NeighborCacheComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(NeighbourCacheComponent);
+    fixture = TestBed.createComponent(NeighborCacheComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

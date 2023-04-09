@@ -19,7 +19,7 @@ import { LoginFormComponent } from './user-management/login-form/login-form.comp
 import {MatInputModule} from "@angular/material/input";
 import {MatDialogModule} from '@angular/material/dialog';
 import { LogViewComponent } from './log-view/log-view.component';
-import { NeighbourCacheComponent } from './neighbour-cache/neighbour-cache.component';
+import { NeighborCacheComponent } from './neighbor-cache/neighbor-cache.component';
 import { CopyToClipboradTextWithBtnComponent } from './copy-to-clipborad-text-with-btn/copy-to-clipborad-text-with-btn.component';
 
 @NgModule({
@@ -32,7 +32,7 @@ import { CopyToClipboradTextWithBtnComponent } from './copy-to-clipborad-text-wi
     UserManagementComponent,
     LoginFormComponent,
     LogViewComponent,
-    NeighbourCacheComponent,
+    NeighborCacheComponent,
     CopyToClipboradTextWithBtnComponent
   ],
     imports: [
