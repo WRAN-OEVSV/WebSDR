@@ -19,6 +19,8 @@ import { LoginFormComponent } from './user-management/login-form/login-form.comp
 import {MatInputModule} from "@angular/material/input";
 import {MatDialogModule} from '@angular/material/dialog';
 import { LogViewComponent } from './log-view/log-view.component';
+import { NeighbourCacheComponent } from './neighbour-cache/neighbour-cache.component';
+import { CopyToClipboradTextWithBtnComponent } from './copy-to-clipborad-text-with-btn/copy-to-clipborad-text-with-btn.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { LogViewComponent } from './log-view/log-view.component';
     WaterfallComponent,
     UserManagementComponent,
     LoginFormComponent,
-    LogViewComponent
+    LogViewComponent,
+    NeighbourCacheComponent,
+    CopyToClipboradTextWithBtnComponent
   ],
     imports: [
         BrowserModule,

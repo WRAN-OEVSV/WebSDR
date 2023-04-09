@@ -40,6 +40,7 @@ export class AuthenticationService {
           this.permissions = [];
         }
         this.authenticated = true;
+        this.websocketService.getSocketEventEmitter().emit("authenticated")
       }
       if (event.auth.message == 'Password Wrong') {
         // handle not successful
