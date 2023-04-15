@@ -2,5 +2,6 @@
 <app-navbar>
   <app-waterfall></app-waterfall>
   <app-log-view *ngIf="authenticationService.hasPermission('read_log')"></app-log-view>
+  <app-neighbor-cache *ngIf="authenticationService.hasPermission('read_neighbour_cache')"></app-neighbor-cache>
   <app-footer></app-footer>
 </app-navbar>

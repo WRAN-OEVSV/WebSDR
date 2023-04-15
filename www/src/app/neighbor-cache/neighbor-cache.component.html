@@ -1,0 +1,32 @@
+<table>
+  <thead>
+    <tr>
+      <th i18n>Callsign</th>
+      <th i18n>MAC Address</th>
+      <th i18n>IPv4 Address</th>
+      <th i18n>IPv6 Address</th>
+      <th i18n>Comment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let entry of this.neighbourCache">
+      <td><a [href]="'https://www.qrz.com/db/' + entry.callsign" target="_blank" *ngIf="entry.callsign.length > 3">{{ entry.callsign }}</a></td>
+      <td><app-copy-to-clipborad-text-with-btn [text]="entry.mac"></app-copy-to-clipborad-text-with-btn></td>
+      <td>
+        <ul>
+          <li *ngFor="let ipAddress of entry.ipv4">
+            <app-copy-to-clipborad-text-with-btn [text]="ipAddress"></app-copy-to-clipborad-text-with-btn>
+          </li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li *ngFor="let ipAddress of entry.ipv6">
+            <app-copy-to-clipborad-text-with-btn [text]="ipAddress"></app-copy-to-clipborad-text-with-btn>
+          </li>
+        </ul>
+      </td>
+      <td>{{entry.comment}}</td>
+    </tr>
+  </tbody>
+</table>
