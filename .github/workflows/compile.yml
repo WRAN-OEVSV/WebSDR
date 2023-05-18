@@ -19,17 +19,12 @@ jobs:
   compile:
     runs-on: "ubuntu-latest"
     steps:
-      - name: install dependencies
-        uses: actions/checkout@v3
 
-      - name: install dependencies
-        run: sudo apt-get install liblimesuite-dev libliquid-dev libwebsockets-dev
-
-
-      - name: Link check (warnings, changed files)
-        run: |
-          mkdir build;
-          cd build;
-          cmake ..;
-          make;
-          cd ..;
+      - uses: actions/checkout@v3
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - run: cd www
+      - run: npm ci
+      - run: npm run build
