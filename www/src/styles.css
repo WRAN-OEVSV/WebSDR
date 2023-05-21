@@ -1,8 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Make content area fill the entire browser window */
-html,
-.fullscreen {
+html, .fullscreen {
   display: grid;
   height: 100%;
   margin: 0;
@@ -14,9 +13,15 @@ html,
 .container-fluid {
   margin: auto;
   text-align: center;
-  width: 98%;
-  height: 90%;
+  width: 100%;
+  height: 50%;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

@@ -38,7 +38,7 @@ Spectrum.prototype.addWaterfallRow = function(bins) {
   this.rowToImageData(bins);
   this.ctx_wf.putImageData(this.imagedata, 0, 0);
 
-  if (this.wfrowcount % 100 == 0)
+  if (this.wfrowcount % 100 === 0)
   {
     var timeString = new Date().toLocaleTimeString();
     this.ctx_wf.font = "12 sans-serif";
@@ -80,6 +80,7 @@ Spectrum.prototype.drawFFT = function(bins) {
 }
 
 Spectrum.prototype.drawSpectrum = function(bins) {
+  let i;
   var width = this.ctx.canvas.width;
   var height = this.ctx.canvas.height;
 
@@ -92,7 +93,7 @@ Spectrum.prototype.drawSpectrum = function(bins) {
     if (!this.binsAverage || this.binsAverage.length != bins.length) {
       this.binsAverage = Array.from(bins);
     } else {
-      for (var i = 0; i < bins.length; i++) {
+      for (i = 0; i < bins.length; i++) {
         this.binsAverage[i] += this.alpha * (bins[i] - this.binsAverage[i]);
       }
     }
@@ -104,7 +105,7 @@ Spectrum.prototype.drawSpectrum = function(bins) {
     if (!this.binsMax || this.binsMax.length != bins.length) {
       this.binsMax = Array.from(bins);
     } else {
-      for (var i = 0; i < bins.length; i++) {
+      for (i = 0; i < bins.length; i++) {
         if (bins[i] > this.binsMax[i]) {
           this.binsMax[i] = bins[i];
         } else {
@@ -146,8 +147,8 @@ Spectrum.prototype.drawSpectrum = function(bins) {
 }
 
 Spectrum.prototype.updateAxes = function() {
-  var width = this.ctx_axes.canvas.width;
-  var height = this.ctx_axes.canvas.height;
+  const width = this.ctx_axes.canvas.width;
+  const height = this.ctx_axes.canvas.height;
 
   // Clear axes canvas
   this.ctx_axes.clearRect(0, 0, width, height);

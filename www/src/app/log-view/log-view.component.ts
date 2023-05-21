@@ -18,6 +18,10 @@ export class LogViewComponent {
     if (message['log']) {
       const log = message.log.message;
       this.events.push(log);
+      // limit length of the log in this view to 5 entries - otherwise we will get a very long log
+      if (this.events.length > 5) {
+        this.events.shift();
+      }
     }
   }
 }

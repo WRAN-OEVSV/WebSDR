@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, Input, OnInit} from '@angular/core';
 import {WebsocketService} from "../websocket.service";
 
 // @ts-ignore
@@ -19,21 +19,21 @@ export class WaterfallComponent implements OnInit {
   @Input("keybindingEnabled")
   keybindingEnabled: boolean = false;
 
-  constructor(private websocket: WebsocketService) {
+  constructor(private websocket: WebsocketService, private ref: ElementRef) {
   }
 
   ngOnInit(): void {
-
-    // Create spectrum object on canvas with ID "waterfall"
+    const container = this.ref.nativeElement.querySelector('#containerWaterfall') as HTMLDivElement;
+    const waterfall = this.ref.nativeElement.querySelector('#waterfall') as HTMLCanvasElement;
+    waterfall.width = container.clientWidth;
+    waterfall.height = container.clientHeight;
     this.spectrum = new Spectrum(
       "waterfall", {
         spectrumPercent: 25,
         logger: 'log',
-        //autoScale: true
+      //autoScale: true
       });
-
-
-    this.websocket.getEmitter().subscribe((data) => this.processEvent(data))
+    this.websocket.getEmitter().subscribe((data) => this.processEvent(data));
 
 
     window.addEventListener("keydown", (e) => {
